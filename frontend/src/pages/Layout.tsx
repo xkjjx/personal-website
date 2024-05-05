@@ -1,5 +1,5 @@
-// components/Layout.tsx
 import React, { ReactNode } from 'react';
+import Nav from './Nav';
 
 interface LayoutProps {
     children: ReactNode;
@@ -8,9 +8,8 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div>
-            <header>Your Header</header>
+            <Nav />
             <main>{children}</main>
-            <footer>Your Footer</footer>
         </div>
     );
 };
