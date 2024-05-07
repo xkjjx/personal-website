@@ -2,18 +2,15 @@ import {marked} from 'marked';
 import fs from 'fs/promises';
 import path from 'path';
 
+export default function Blog({ htmlContent }: any) {
+    return <div className="bg-base-100 py-10" dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+}
+
 const processTextIntoID = (text: string) => {
     return text.replace(/ /g, '-').toLowerCase();
 }
 
-export default function Blog({ htmlContent }: any) {
-    return <div className="bg-base-100" dangerouslySetInnerHTML={{ __html: htmlContent }} />;
-}
-
 let renderer = new marked.Renderer();
-
-
-
 
 renderer.heading = function(text, level) {
     return `<h${level} class="${getHeadingClass(level)}" id="${processTextIntoID(text)}">${text}</h${level}>`;
