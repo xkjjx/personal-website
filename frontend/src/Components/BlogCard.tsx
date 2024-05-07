@@ -1,17 +1,14 @@
-interface Blog {
+export interface Blog {
     title: string;
     description: string;
-    content: string;
 }
 
 
-const BlogCard = ({ blog }: { blog: Blog }) => {
+export const BlogCard = ({ blog }: { blog: Blog }) => {
   return (
     <div>
       <h2>{blog.title}</h2>
-      <p>{blog.content}</p>
+      <p>{blog.description}</p>
     </div>
   );
 }
-
-export default BlogCard;
