@@ -2,6 +2,10 @@ import {marked} from 'marked';
 import fs from 'fs/promises';
 import path from 'path';
 
+const processTextIntoID = (text: string) => {
+    return text.replace(/ /g, '-').toLowerCase();
+}
+
 export default function Blog({ htmlContent }: any) {
     return <div className="bg-base-100" dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 }
@@ -9,25 +13,27 @@ export default function Blog({ htmlContent }: any) {
 let renderer = new marked.Renderer();
 
 
+
+
 renderer.heading = function(text, level) {
-    return `<h${level} class="${getHeadingClass(level)}">${text}</h${level}>`;
+    return `<h${level} class="${getHeadingClass(level)}" id="${processTextIntoID(text)}">${text}</h${level}>`;
 };
 
 renderer.paragraph = function(text) {
-    return `<p class="mx-10 my-3 font-mono text-primary">${text}</p>`;
+    return `<p class="mx-32 my-3 font-mono text-primary">${text}</p>`;
 };
 
 renderer.list = function(body, ordered) {
     let type = ordered ? 'ol' : 'ul';
-    return `<${type} class="mx-10 my-3 font-sans text-secondary font-bold">${body}</${type}>`;
+    return `<${type} class="mx-32 my-3 font-serif text-secondary font-bold">${body}</${type}>`;
 }
 
 function getHeadingClass(level: number): string {
     switch (level) {
         case 1:
-            return "text-4xl mx-10 my-3 font-sans text-secondary";
+            return "text-4xl mx-32 my-3 font-serif text-secondary";
         case 2:
-            return "text-2xl mx-10 my-3 font-sans text-secondary";
+            return "text-2xl mx-32 my-3 font-serif text-secondary";
         case 3:
         case 4:
         case 5:
